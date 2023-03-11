@@ -6,12 +6,13 @@ export var gravity = 10
 export var run_speed = 100
 export var jump_speed = 250
 var velocity = Vector2.ZERO
+var direction = Vector2.LEFT
 
 func _physics_process(_delta):
 	if !is_on_floor():
 		velocity.y += gravity
 
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_pressed("jump"):
 		if is_on_floor():
 			velocity.y -= jump_speed
 			
@@ -28,8 +29,10 @@ func _physics_process(_delta):
 
 	if velocity.x > 0:
 		$Sprite.scale.x = -1
+		direction = Vector2.RIGHT
 	elif velocity.x < 0:
 		$Sprite.scale.x = 1
+		direction = Vector2.LEFT
 
 	if get_slide_count() > 0 and velocity_before_collision.length() > 450:
 		emit_signal("wake_up")

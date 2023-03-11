@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/BombLit.tscn" type="PackedScene" id=3]
 
 [node name="Level2" type="Node2D" groups=["Level"]]
 
@@ -35,6 +34,3 @@ position = Vector2( 266, 91 )
 
 [node name="Block8" parent="." instance=ExtResource( 2 )]
 position = Vector2( 294, 91 )
-
-[node name="BombLit" parent="." instance=ExtResource( 3 )]
-position = Vector2( 210, 0 )
