@@ -3,9 +3,9 @@ extends Node
 var level = 0
 
 func _ready():
-	# TODO: instead of loading level 1, load the initial (cut)scene
-	level += 1
-	load_level("res://Scenes/Level1.tscn")
+	var intro = load("res://Scenes/Intro.tscn").instance()
+	add_child(intro)
+	intro.connect("start_levels", self, "_on_Intro_start_levels")
 
 func load_level(path):
 	print("loading level " + path)
@@ -24,3 +24,11 @@ func _on_Player_wake_up():
 		load_level("res://Scenes/Level2.tscn")
 	if level == 2:
 		print("go to final scene?")
+
+func _on_Intro_start_levels():
+	var cutscenes = get_tree().get_nodes_in_group("Cutscene")
+	for cutscene in cutscenes:
+		cutscene.queue_free()
+
+	level += 1
+	load_level("res://Scenes/Level1.tscn")

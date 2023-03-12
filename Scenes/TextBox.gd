@@ -31,7 +31,7 @@ func initialize(input_texts):
 	$ScrollTimer.start()
 
 func _on_ScrollTimer_timeout():
-	$Label.percent_visible += 0.02
+	$Label.percent_visible += 0.05
 	
 	if $Label.percent_visible == 1.0:
 		$ScrollTimer.stop()
