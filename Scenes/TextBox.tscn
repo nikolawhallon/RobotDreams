@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Font/kongtext.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/text_box.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/TextBox.gd" type="Script" id=3]
+[ext_resource path="res://Resources/context_sensitive_text.tres" type="Theme" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="TextBox" type="Node2D" groups=["TextBox"]]
+script = ExtResource( 3 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_right = 133.0
+margin_bottom = 35.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 131.0
+margin_bottom = 33.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 0.733333, 0.862745, 0.294118, 1 )
+text = "yxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxy"
+autowrap = true
+max_lines_visible = 3
+
+[node name="ScrollTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="EnterLabel" type="Label" parent="."]
+visible = false
+margin_left = 94.0
+margin_top = 33.0
+margin_right = 134.0
+margin_bottom = 41.0
+theme = ExtResource( 4 )
+text = "ENTER"
+
+[node name="EnterBlinkTimer" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
+[connection signal="timeout" from="ScrollTimer" to="." method="_on_ScrollTimer_timeout"]
+[connection signal="timeout" from="EnterBlinkTimer" to="." method="_on_EnterBlinkTimer_timeout"]

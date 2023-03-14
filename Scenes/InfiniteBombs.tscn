@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/context_sensitive_text.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/bomb_unlit.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InfiniteBombs.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="InfiniteBombs" type="Area2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite1" type="Sprite" parent="."]
+position = Vector2( 0, -10 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( -4, -5 )
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 4, -5 )
+texture = ExtResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( -8, 1 )
+texture = ExtResource( 2 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 8, 1 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 6.0
+margin_top = -16.0
+margin_right = 30.0
+margin_bottom = -8.0
+theme = ExtResource( 1 )
+text = "inf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_InfiniteBombs_body_entered"]

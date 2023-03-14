@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Resources/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Level1.gd" type="Script" id=3]
+[ext_resource path="res://Resources/context_sensitive_text.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/arrow_up_right.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/HintArea.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/CityScape.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 50 )
+
+[node name="Level1" type="Node2D" groups=["Level"]]
+script = ExtResource( 3 )
+
+[node name="CityScape" parent="." instance=ExtResource( 7 )]
+
+[node name="Hint1" type="Area2D" parent="."]
+visible = false
+position = Vector2( 220, 180 )
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Hint1"]
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Hint1"]
+margin_left = 1.0
+margin_top = 7.0
+margin_right = 41.0
+margin_bottom = 15.0
+theme = ExtResource( 4 )
+text = "SPACE"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hint1"]
+shape = SubResource( 1 )
+
+[node name="Hint2" type="Node2D" parent="."]
+position = Vector2( 260, 40 )
+
+[node name="Sprite" type="Sprite" parent="Hint2"]
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Hint2"]
+margin_left = 5.0
+margin_top = -11.0
+margin_right = 37.0
+margin_bottom = -3.0
+theme = ExtResource( 4 )
+text = "JUMP"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 28, 26 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 16, 0, 0, 65536, 0, 0, 65552, 0, 0, 131072, 0, 0, 131088, 0, 0, 196608, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196624, 0, 0, 262144, 0, 0, 262156, 0, 0, 262160, 0, 0, 327680, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327696, 0, 0, 393216, 0, 0, 393232, 0, 0, 458752, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 524288, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 222 )
+camera_limit_bottom = 260
+camera_limit_left = 0
+camera_limit_right = 476
+
+[connection signal="body_entered" from="Hint1" to="Hint1" method="_on_Hint_body_entered"]
+[connection signal="body_exited" from="Hint1" to="Hint1" method="_on_Hint_body_exited"]
