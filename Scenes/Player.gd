@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal wake_up
+signal infinite_bombs_collected
+var infinite_bombs_collected = false
 
 export var camera_limit_bottom = 10000000
 export var camera_limit_left = -10000000
@@ -18,7 +20,7 @@ func _ready():
 	$Camera2D.limit_right = camera_limit_right
 
 func _input(_event):
-	if Input.is_action_just_pressed("bomb") and !input_disabled:
+	if Input.is_action_just_pressed("bomb") and !input_disabled and infinite_bombs_collected:
 		var lit_bomb = load("res://Scenes/BombLit.tscn").instance()
 		if direction == Vector2.LEFT:
 			lit_bomb.global_position = global_position + Vector2(-16, -8)

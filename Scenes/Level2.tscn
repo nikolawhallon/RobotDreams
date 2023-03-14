@@ -1,11 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/CityScape.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/InfiniteBombs.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level2.gd" type="Script" id=6]
+[ext_resource path="res://Assets/payphone.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 20 )
 
 [node name="Level2" type="Node2D" groups=["Level"]]
+script = ExtResource( 6 )
+
+[node name="Payphone" type="Area2D" parent="."]
+position = Vector2( 347, 65 )
+
+[node name="Payphone" type="Sprite" parent="Payphone"]
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Payphone"]
+shape = SubResource( 1 )
 
 [node name="CityScape" parent="." instance=ExtResource( 4 )]
 
@@ -40,7 +56,13 @@ position = Vector2( 266, 91 )
 position = Vector2( 294, 91 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 126, 226 )
+position = Vector2( 126, 222 )
 camera_limit_bottom = 260
 camera_limit_left = 0
 camera_limit_right = 504
+
+[node name="InfiniteBombs" parent="." instance=ExtResource( 5 )]
+position = Vector2( 98, 171 )
+
+[connection signal="body_entered" from="Payphone" to="." method="_on_Payphone_body_entered"]
+[connection signal="body_exited" from="Payphone" to="." method="_on_Payphone_body_exited"]

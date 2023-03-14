@@ -12,7 +12,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[node name="TextBox" type="Node2D"]
+[node name="TextBox" type="Node2D" groups=["TextBox"]]
 script = ExtResource( 3 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
