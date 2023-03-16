@@ -9,7 +9,7 @@ export var camera_limit_left = -10000000
 export var camera_limit_right = 10000000
 export var gravity = 10
 export var run_speed = 100
-export var jump_speed = 250
+export var jump_speed = 260
 var velocity = Vector2.ZERO
 var direction = Vector2.LEFT
 var input_disabled = false
@@ -29,10 +29,11 @@ func _input(_event):
 			lit_bomb.global_position = global_position + Vector2(16, -8)
 			lit_bomb.apply_impulse(Vector2.ZERO, Vector2(100, -100))
 		get_parent().add_child(lit_bomb)
+	if Input.is_action_just_pressed("skip"):
+		emit_signal("wake_up")
 
 func _physics_process(_delta):
-	if !is_on_floor():
-		velocity.y += gravity
+	velocity.y += gravity
 
 	if Input.is_action_pressed("jump") and !input_disabled:
 		if is_on_floor():
@@ -50,11 +51,21 @@ func _physics_process(_delta):
 	velocity = move_and_slide(velocity, Vector2.UP, false, 4, 0.785398, false)
 
 	if velocity.x > 0:
-		$Sprite.scale.x = -1
+		if is_on_floor():
+			$AnimatedSprite.animation = "walk"
+		else:
+			$AnimatedSprite.animation = "idle"
+		$AnimatedSprite.scale.x = -1
 		direction = Vector2.RIGHT
 	elif velocity.x < 0:
-		$Sprite.scale.x = 1
+		if is_on_floor():
+			$AnimatedSprite.animation = "walk"
+		else:
+			$AnimatedSprite.animation = "idle"
+		$AnimatedSprite.scale.x = 1
 		direction = Vector2.LEFT
+	else:
+		$AnimatedSprite.animation = "idle"
 
 	if get_slide_count() > 0 and velocity_before_collision.length() > 450:
 		emit_signal("wake_up")

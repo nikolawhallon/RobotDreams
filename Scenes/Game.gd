@@ -1,6 +1,7 @@
 extends Node
 
 var level = 0
+var infinite_bombs_collected = false
 
 func _ready():
 	load_intro()
@@ -28,16 +29,21 @@ func load_level(path):
 	add_child(new_level)
 	new_level.get_node("Player").connect("wake_up", self, "_on_Player_wake_up")
 	new_level.get_node("Player").connect("infinite_bombs_collected", self, "_on_Player_infinite_bombs_collected")
+	new_level.get_node("Player").infinite_bombs_collected = infinite_bombs_collected
 
 func _on_Player_wake_up():
 	if level == 1:
 		level += 1
 		load_level("res://Scenes/Level2.tscn")
 	elif level == 2:
+		level += 1
+		load_level("res://Scenes/Level3.tscn")
+	elif level == 3:
 		load_outro()
 
 func _on_Player_infinite_bombs_collected():
 	$CanvasLayer/MarginContainer/HBoxContainer.visible = true
+	infinite_bombs_collected = true
 
 func _on_Intro_start_levels():
 	level += 1

@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/girder.png" type="Texture" id=1]
+[ext_resource path="res://Assets/rope.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/MovingGirderTypeA.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2, 48 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2, 48 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 72, 4 )
+
+[node name="MovingGirderTypeA" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="LeftRope" type="KinematicBody2D" parent="."]
+position = Vector2( 4, 56 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="Rope" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+
+[node name="Rope3" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, 8 )
+texture = ExtResource( 2 )
+
+[node name="Rope2" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, 24 )
+texture = ExtResource( 2 )
+
+[node name="Rope4" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, 40 )
+texture = ExtResource( 2 )
+
+[node name="Rope5" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, -24 )
+texture = ExtResource( 2 )
+
+[node name="Rope6" type="Sprite" parent="LeftRope"]
+position = Vector2( 0, -40 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftRope"]
+shape = SubResource( 3 )
+
+[node name="RightRope" type="KinematicBody2D" parent="."]
+position = Vector2( 44, 56 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="Rope2" type="Sprite" parent="RightRope"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+
+[node name="Rope4" type="Sprite" parent="RightRope"]
+position = Vector2( 0, 8 )
+texture = ExtResource( 2 )
+
+[node name="Rope" type="Sprite" parent="RightRope"]
+position = Vector2( 0, 24 )
+texture = ExtResource( 2 )
+
+[node name="Rope3" type="Sprite" parent="RightRope"]
+position = Vector2( 0, 40 )
+texture = ExtResource( 2 )
+
+[node name="Rope5" type="Sprite" parent="RightRope"]
+position = Vector2( 0, -24 )
+texture = ExtResource( 2 )
+
+[node name="Rope6" type="Sprite" parent="RightRope"]
+position = Vector2( 0, -40 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightRope"]
+shape = SubResource( 4 )
+
+[node name="MovingGirder" type="RigidBody2D" parent="."]
+position = Vector2( 24, 104 )
+
+[node name="Girder" type="Sprite" parent="MovingGirder"]
+position = Vector2( -16, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder2" type="Sprite" parent="MovingGirder"]
+texture = ExtResource( 1 )
+
+[node name="Girder3" type="Sprite" parent="MovingGirder"]
+position = Vector2( 16, 0 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingGirder"]
+shape = SubResource( 1 )
+
+[node name="Rail" type="StaticBody2D" parent="."]
+position = Vector2( 8, 4 )
+
+[node name="Girder9" type="Sprite" parent="Rail"]
+texture = ExtResource( 1 )
+
+[node name="Girder4" type="Sprite" parent="Rail"]
+position = Vector2( 16, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder5" type="Sprite" parent="Rail"]
+position = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder6" type="Sprite" parent="Rail"]
+position = Vector2( 48, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder7" type="Sprite" parent="Rail"]
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder8" type="Sprite" parent="Rail"]
+position = Vector2( 80, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder" type="Sprite" parent="Rail"]
+position = Vector2( 96, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder2" type="Sprite" parent="Rail"]
+position = Vector2( 112, 0 )
+texture = ExtResource( 1 )
+
+[node name="Girder3" type="Sprite" parent="Rail"]
+position = Vector2( 128, 0 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rail"]
+position = Vector2( 64, 0 )
+shape = SubResource( 2 )
+
+[node name="LeftRopeJoint" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 4, 100 )
+node_a = NodePath("../MovingGirder")
+node_b = NodePath("../LeftRope")
+length = 1.0
+stiffness = 64.0
+damping = 16.0
+
+[node name="RightRopeJoint" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 44, 100 )
+node_a = NodePath("../MovingGirder")
+node_b = NodePath("../RightRope")
+length = 1.0
+stiffness = 64.0
+damping = 16.0
