@@ -7,9 +7,12 @@ func destroy():
 	get_tree().queue_delete(self)
 	
 func _input(_event):
-	if Input.is_action_just_pressed("next") and $Label.percent_visible == 1.0:
-		next_text()
-		$EnterLabel.visible = false
+	if Input.is_action_just_pressed("next"):
+		if $Label.percent_visible == 1.0:
+			next_text()
+			$EnterLabel.visible = false
+		else:
+			$Label.percent_visible = 1.0
 
 func next_text():
 	text_index += 1
@@ -31,7 +34,7 @@ func initialize(input_texts):
 	$ScrollTimer.start()
 
 func _on_ScrollTimer_timeout():
-	$Label.percent_visible += 0.05
+	$Label.percent_visible = clamp($Label.percent_visible + 0.05, 0.0, 1.0)
 	
 	if $Label.percent_visible == 1.0:
 		$ScrollTimer.stop()

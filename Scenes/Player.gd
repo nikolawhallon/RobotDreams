@@ -54,18 +54,28 @@ func _physics_process(_delta):
 		if is_on_floor():
 			$AnimatedSprite.animation = "walk"
 		else:
-			$AnimatedSprite.animation = "idle"
+			if $AnimatedSprite.animation != "air":
+				$AnimatedSprite.animation = "jump"
 		$AnimatedSprite.scale.x = -1
 		direction = Vector2.RIGHT
 	elif velocity.x < 0:
 		if is_on_floor():
 			$AnimatedSprite.animation = "walk"
 		else:
-			$AnimatedSprite.animation = "idle"
+			if $AnimatedSprite.animation != "air":
+				$AnimatedSprite.animation = "jump"
 		$AnimatedSprite.scale.x = 1
 		direction = Vector2.LEFT
 	else:
-		$AnimatedSprite.animation = "idle"
+		if is_on_floor():
+			$AnimatedSprite.animation = "idle"
+		else:
+			if $AnimatedSprite.animation != "air":
+				$AnimatedSprite.animation = "jump"
 
 	if get_slide_count() > 0 and velocity_before_collision.length() > 450:
 		emit_signal("wake_up")
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "jump":
+		$AnimatedSprite.animation = "air"
