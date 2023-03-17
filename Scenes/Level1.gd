@@ -1,5 +1,7 @@
 extends Node2D
 
+signal auto_win
+
 func _ready():
 	$Player.input_disabled = true
 	var text_box = load("res://Scenes/TextBox.tscn").instance()

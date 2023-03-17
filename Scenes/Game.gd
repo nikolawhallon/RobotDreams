@@ -30,6 +30,7 @@ func load_level(path):
 	new_level.get_node("Player").connect("wake_up", self, "_on_Player_wake_up")
 	new_level.get_node("Player").connect("infinite_bombs_collected", self, "_on_Player_infinite_bombs_collected")
 	new_level.get_node("Player").infinite_bombs_collected = infinite_bombs_collected
+	new_level.connect("auto_win", self, "_on_Level_auto_win")
 
 func _on_Player_wake_up():
 	if level == 1:
@@ -61,3 +62,6 @@ func clear_levels_and_cutscenes():
 	var cutscenes = get_tree().get_nodes_in_group("Cutscene")
 	for cutscene in cutscenes:
 		cutscene.queue_free()
+
+func _on_Level_auto_win():
+	load_outro()

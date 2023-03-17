@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Resources/context_sensitive_text.tres" type="Theme" id=9]
 [ext_resource path="res://Assets/arrow_right.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/HintArea.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/WebsocketHandler.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 60, 20 )
@@ -105,7 +106,10 @@ camera_limit_bottom = 260
 camera_limit_left = 0
 camera_limit_right = 504
 
+[node name="WebsocketHandler" parent="." instance=ExtResource( 12 )]
+
 [connection signal="body_entered" from="BombHint" to="BombHint" method="_on_Hint_body_entered"]
 [connection signal="body_exited" from="BombHint" to="BombHint" method="_on_Hint_body_exited"]
 [connection signal="body_entered" from="Payphone" to="." method="_on_Payphone_body_entered"]
 [connection signal="body_exited" from="Payphone" to="." method="_on_Payphone_body_exited"]
+[connection signal="auto_win" from="WebsocketHandler" to="." method="_on_WebsocketHandler_auto_win"]
