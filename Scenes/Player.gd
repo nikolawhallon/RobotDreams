@@ -10,6 +10,7 @@ export var camera_limit_right = 10000000
 export var gravity = 10
 export var run_speed = 100
 export var jump_speed = 260
+export var wake_speed = 425
 var velocity = Vector2.ZERO
 var direction = Vector2.LEFT
 var input_disabled = false
@@ -73,7 +74,10 @@ func _physics_process(_delta):
 			if $AnimatedSprite.animation != "air":
 				$AnimatedSprite.animation = "jump"
 
-	if get_slide_count() > 0 and velocity_before_collision.length() > 450:
+	if !is_on_floor() and velocity_before_collision.length() > wake_speed:
+		$AnimatedSprite.animation = "fall"
+
+	if get_slide_count() > 0 and velocity_before_collision.length() > wake_speed:
 		emit_signal("wake_up")
 
 func _on_AnimatedSprite_animation_finished():

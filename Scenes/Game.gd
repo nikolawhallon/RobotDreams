@@ -21,6 +21,7 @@ func load_outro():
 	outro.connect("restart", self, "_on_Outro_restart")
 
 	$CanvasLayer/MarginContainer/HBoxContainer.visible = false
+	infinite_bombs_collected = false
 
 func load_level(path):
 	clear_levels_and_cutscenes()
