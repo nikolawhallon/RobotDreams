@@ -85,6 +85,8 @@ shape = SubResource( 4 )
 
 [node name="MovingGirder" type="RigidBody2D" parent="."]
 position = Vector2( 24, 104 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="Girder" type="Sprite" parent="MovingGirder"]
 position = Vector2( -16, 0 )
@@ -102,6 +104,8 @@ shape = SubResource( 1 )
 
 [node name="Rail" type="StaticBody2D" parent="."]
 position = Vector2( 8, 4 )
+collision_layer = 3
+collision_mask = 3
 
 [node name="Girder9" type="Sprite" parent="Rail"]
 texture = ExtResource( 1 )
