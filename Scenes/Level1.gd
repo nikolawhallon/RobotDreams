@@ -12,3 +12,5 @@ func _ready():
 
 func _on_TextBox_tree_exiting():
 	$Player.input_disabled = false
+	# Note: this is a hack for sure
+	$HintMove.visible = true
