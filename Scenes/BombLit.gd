@@ -1,5 +1,10 @@
 extends RigidBody2D
 
+var sfx_explosion = preload("res://Assets/Sfx/explosion.wav")
+
+func _ready():
+	$AudioStreamPlayer2D.set_volume_db(-12.0)
+
 func destroy():
 	get_tree().queue_delete(self)
 
@@ -11,6 +16,8 @@ func explode():
 	$Sprite.visible = false
 	$AnimatedSprite.visible = true
 	$AnimatedSprite.play("explosion")
+	$AudioStreamPlayer2D.stream = sfx_explosion
+	$AudioStreamPlayer2D.play()
 
 func _on_Timer_timeout():
 	explode()

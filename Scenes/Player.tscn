@@ -60,4 +60,14 @@ frames = SubResource( 2 )
 animation = "fall"
 playing = true
 
+[node name="AudioStep" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioJumpAir" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioExplosion" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioThrow" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="finished" from="AudioJumpAir" to="." method="_on_AudioJumpAir_finished"]
+[connection signal="finished" from="AudioExplosion" to="." method="_on_AudioExplosion_finished"]

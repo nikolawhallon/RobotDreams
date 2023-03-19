@@ -51,5 +51,7 @@ text = "ENTER"
 wait_time = 0.75
 autostart = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="timeout" from="ScrollTimer" to="." method="_on_ScrollTimer_timeout"]
 [connection signal="timeout" from="EnterBlinkTimer" to="." method="_on_EnterBlinkTimer_timeout"]
