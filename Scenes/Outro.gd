@@ -38,7 +38,7 @@ func _on_FirstTextBox_tree_exiting():
 		var text_box = load("res://Scenes/TextBox.tscn").instance()
 		add_child(text_box)
 		text_box.global_position = $Bed.global_position + Vector2(16, -64)
-		text_box.initialize(["I'm awake?", "It was fun being a robot, but infinite dreams are scary.", "I'm relieved to be awake!"])
+		text_box.initialize(["I'm awake?", "It was fun being a robot.", "But infinite dreams are scary.", "I'm relieved to be awake!"])
 		text_box.connect("tree_exiting", self, "_on_SecondTextBox_tree_exiting")
 
 func _on_SecondTextBox_tree_exiting():
