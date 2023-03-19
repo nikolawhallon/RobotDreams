@@ -13,12 +13,13 @@ func load_intro():
 	add_child(intro)
 	intro.connect("start_levels", self, "_on_Intro_start_levels")
 
-func load_outro():
+func load_outro(ending_type):
 	clear_levels_and_cutscenes()
 
 	var outro = load("res://Scenes/Outro.tscn").instance()
 	add_child(outro)
 	outro.connect("restart", self, "_on_Outro_restart")
+	outro.initialize(ending_type)
 
 	$CanvasLayer/MarginContainer/HBoxContainer.visible = false
 	infinite_bombs_collected = false
@@ -41,7 +42,7 @@ func _on_Player_wake_up():
 		level += 1
 		load_level("res://Scenes/Level3.tscn")
 	elif level == 3:
-		load_outro()
+		load_outro(0)
 
 func _on_Player_infinite_bombs_collected():
 	$CanvasLayer/MarginContainer/HBoxContainer.visible = true
@@ -65,4 +66,4 @@ func clear_levels_and_cutscenes():
 		cutscene.queue_free()
 
 func _on_Level_auto_win():
-	load_outro()
+	load_outro(1)

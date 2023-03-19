@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Bed/robot_sleeping.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Bed/human_resting.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Bed/robot_resting.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Bed/human_sleeping.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "human_resting",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "human_sleeping",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "robot_resting",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "robot_sleeping",
+"speed": 5.0
+} ]
+
+[node name="Bed" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "human_resting"

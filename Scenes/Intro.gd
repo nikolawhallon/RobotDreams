@@ -9,8 +9,8 @@ func _ready():
 	var text_box = load("res://Scenes/TextBox.tscn").instance()
 	add_child(text_box)
 	text_box.global_position = $Bed.global_position + Vector2(16, -64)
-	text_box.initialize(["I'm so tired.", "Time to sleep...", ".........", "...zzz..."])
-	text_box.connect("tree_exiting", self, "_on_TextBox_tree_exiting")
+	text_box.initialize(["I'm so tired.", "Time to sleep..."])
+	text_box.connect("tree_exiting", self, "_on_FirstTextBox_tree_exiting")
 	
 func _process(delta):
 	velocity += -k * $Bed.position
@@ -22,6 +22,13 @@ func _on_FadeoutTimer_timeout():
 	if modulate.a <= 0.0:
 		emit_signal("start_levels")
 
-func _on_TextBox_tree_exiting():
-	$Bed.animation = "sleeping"
+func _on_FirstTextBox_tree_exiting():
+	$Bed.animation = "human_sleeping"
+	var text_box = load("res://Scenes/TextBox.tscn").instance()
+	add_child(text_box)
+	text_box.global_position = $Bed.global_position + Vector2(16, -64)
+	text_box.initialize([".........", "...zzz..."])
+	text_box.connect("tree_exiting", self, "_on_SecondTextBox_tree_exiting")
+
+func _on_SecondTextBox_tree_exiting():
 	$FadeoutTimer.start()
